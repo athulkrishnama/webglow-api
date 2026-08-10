@@ -19,6 +19,9 @@ class EnvironmentVariables {
 
   @IsString()
   JWT_REFRESH_SECRET: string;
+
+  @IsString()
+  FRONTEND_URL: string;
 }
 
 export function validate(
