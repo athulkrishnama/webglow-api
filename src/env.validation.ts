@@ -13,6 +13,12 @@ class EnvironmentVariables {
 
   @IsString()
   MONGODB_URI: string;
+
+  @IsString()
+  JWT_ACCESS_SECRET: string;
+
+  @IsString()
+  JWT_REFRESH_SECRET: string;
 }
 
 export function validate(
