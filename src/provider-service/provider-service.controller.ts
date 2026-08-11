@@ -1,7 +1,8 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Body, Query, UseGuards } from '@nestjs/common';
 import { ProviderServiceService } from './provider-service.service';
 import { ROUTES } from '../common/constants/routes.constant';
 import { CreateProviderServiceDto } from './dto/create-provider-service.dto';
+import { ListServicesQueryDto } from './dto/list-services-query.dto';
 import { ResponseMessage } from '../common/decorators/response-message.decorator';
 import { RESPONSE_MESSAGES } from '../common/constants/response-messages.constant';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
@@ -29,5 +30,30 @@ export class ProviderServiceController {
       createProviderServiceDto,
       user.sub,
     );
+  }
+
+  @Get(ROUTES.PROVIDER_SERVICE.MY_SERVICES)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLES.PROVIDER)
+  @ResponseMessage(RESPONSE_MESSAGES.PROVIDER_SERVICE.MY_LIST_SUCCESS)
+  async getMyServices(
+    @Query() query: ListServicesQueryDto,
+    @CurrentUser() user: JwtPayload,
+  ) {
+    return this._providerServiceService.getMyServices(user.sub, query);
+  }
+
+  @Get(ROUTES.PROVIDER_SERVICE.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(ROLES.ADMIN)
+  @ResponseMessage(RESPONSE_MESSAGES.PROVIDER_SERVICE.ADMIN_LIST_SUCCESS)
+  async getAdminServices(@Query() query: ListServicesQueryDto) {
+    return this._providerServiceService.getAllServices(query);
+  }
+
+  @Get(ROUTES.PROVIDER_SERVICE.BROWSE)
+  @ResponseMessage(RESPONSE_MESSAGES.PROVIDER_SERVICE.BROWSE_SUCCESS)
+  async browseServices(@Query() query: ListServicesQueryDto) {
+    return this._providerServiceService.browseServices(query);
   }
 }

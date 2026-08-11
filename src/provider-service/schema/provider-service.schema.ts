@@ -74,3 +74,5 @@ export class ProviderService {
 
 export const ProviderServiceSchema =
   SchemaFactory.createForClass(ProviderService);
+
+ProviderServiceSchema.index({ 'location.coordinates': '2dsphere' });

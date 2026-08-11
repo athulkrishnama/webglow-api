@@ -8,5 +8,8 @@ export const ROUTES = {
   PROVIDER_SERVICE: {
     BASE: 'provider-service',
     CREATE: '',
+    MY_SERVICES: 'my',
+    BROWSE: 'browse',
+    ADMIN: 'admin',
   },
 };

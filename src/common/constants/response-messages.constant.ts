@@ -6,5 +6,8 @@ export const RESPONSE_MESSAGES = {
   },
   PROVIDER_SERVICE: {
     CREATE_SUCCESS: 'Service created successfully',
+    MY_LIST_SUCCESS: 'My services fetched successfully',
+    ADMIN_LIST_SUCCESS: 'All services fetched successfully',
+    BROWSE_SUCCESS: 'Services fetched successfully',
   },
 };
