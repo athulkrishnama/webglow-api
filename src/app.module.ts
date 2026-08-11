@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { validate } from './env.validation';
 import { ProviderServiceModule } from './provider-service/provider-service.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ProviderServiceModule } from './provider-service/provider-service.modul
     MongooseModule.forRoot(process.env.MONGODB_URI!),
     UserModule,
     ProviderServiceModule,
+    BookingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

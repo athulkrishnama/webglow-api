@@ -12,4 +12,12 @@ export const RESPONSE_MESSAGES = {
     GET_ONE_SUCCESS: 'Service fetched successfully',
     UPDATE_SUCCESS: 'Service updated successfully',
   },
+  BOOKING: {
+    CREATE_SUCCESS: 'Booking created successfully',
+    MY_LIST_SUCCESS: 'My bookings fetched successfully',
+    AVAILABLE_DATES_SUCCESS: 'Available dates fetched successfully',
+    PROVIDER_LIST_SUCCESS: 'Provider bookings fetched successfully',
+    ADMIN_LIST_SUCCESS: 'All bookings fetched successfully',
+    CANCEL_SUCCESS: 'Booking cancelled successfully',
+  },
 };
