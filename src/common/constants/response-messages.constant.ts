@@ -9,5 +9,7 @@ export const RESPONSE_MESSAGES = {
     MY_LIST_SUCCESS: 'My services fetched successfully',
     ADMIN_LIST_SUCCESS: 'All services fetched successfully',
     BROWSE_SUCCESS: 'Services fetched successfully',
+    GET_ONE_SUCCESS: 'Service fetched successfully',
+    UPDATE_SUCCESS: 'Service updated successfully',
   },
 };

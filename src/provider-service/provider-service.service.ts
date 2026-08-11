@@ -1,7 +1,13 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { Types } from 'mongoose';
 import { ProviderServiceRepository } from './repository/provider-service.repository';
 import { CreateProviderServiceDto } from './dto/create-provider-service.dto';
+import { UpdateProviderServiceDto } from './dto/update-provider-service.dto';
 import { ListServicesQueryDto } from './dto/list-services-query.dto';
 import { ProviderService } from './schema/provider-service.schema';
 import { ERRORS } from '../common/constants/errors.constant';
@@ -36,6 +42,62 @@ export class ProviderServiceService {
     } catch (error) {
       throw new BadRequestException(
         `${ERRORS.PROVIDER_SERVICE.CREATE_FAILED}: ${(error as Error).message}`,
+      );
+    }
+  }
+
+  async getServiceById(
+    id: string,
+    providerId: string,
+  ): Promise<ProviderService> {
+    const service = await this._providerServiceRepo.findById(id);
+
+    if (!service) {
+      throw new NotFoundException(ERRORS.PROVIDER_SERVICE.NOT_FOUND);
+    }
+
+    if (service.providerId.toString() !== providerId) {
+      throw new ForbiddenException(ERRORS.PROVIDER_SERVICE.NOT_FOUND);
+    }
+
+    return service;
+  }
+
+  async updateService(
+    id: string,
+    providerId: string,
+    updateProviderServiceDto: UpdateProviderServiceDto,
+  ): Promise<ProviderService> {
+    await this.getServiceById(id, providerId);
+
+    try {
+      const { availability, ...rest } =
+        updateProviderServiceDto as Partial<CreateProviderServiceDto>;
+      const updatePayload: Partial<ProviderService> = { ...rest };
+
+      if (availability !== undefined) {
+        updatePayload.availability = availability.map((a) => ({
+          startDate: new Date(a.startDate),
+          endDate: new Date(a.endDate),
+        }));
+      }
+
+      const updated = await this._providerServiceRepo.update(id, updatePayload);
+
+      if (!updated) {
+        throw new Error('Update returned null');
+      }
+
+      return updated;
+    } catch (error) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof ForbiddenException
+      ) {
+        throw error;
+      }
+      throw new BadRequestException(
+        `${ERRORS.PROVIDER_SERVICE.UPDATE_FAILED}: ${(error as Error).message}`,
       );
     }
   }

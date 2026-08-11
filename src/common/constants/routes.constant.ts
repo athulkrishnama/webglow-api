@@ -11,5 +11,7 @@ export const ROUTES = {
     MY_SERVICES: 'my',
     BROWSE: 'browse',
     ADMIN: 'admin',
+    GET_ONE: ':id',
+    UPDATE: ':id',
   },
 };

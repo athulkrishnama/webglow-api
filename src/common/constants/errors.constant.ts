@@ -15,5 +15,7 @@ export const ERRORS = {
   PROVIDER_SERVICE: {
     CREATE_FAILED: 'Failed to create service',
     LIST_FAILED: 'Failed to fetch services',
+    NOT_FOUND: 'Service not found or access denied',
+    UPDATE_FAILED: 'Failed to update service',
   },
 };
