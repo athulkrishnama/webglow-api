@@ -5,4 +5,8 @@ export const ROUTES = {
     LOGIN: 'login',
     REFRESH_TOKEN: 'refresh-token',
   },
+  PROVIDER_SERVICE: {
+    BASE: 'provider-service',
+    CREATE: '',
+  },
 };

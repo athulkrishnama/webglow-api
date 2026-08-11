@@ -4,4 +4,7 @@ export const RESPONSE_MESSAGES = {
     LOGIN_SUCCESS: 'User logged in successfully',
     REFRESH_TOKEN_SUCCESS: 'Token refreshed successfully',
   },
+  PROVIDER_SERVICE: {
+    CREATE_SUCCESS: 'Service created successfully',
+  },
 };
