@@ -67,6 +67,12 @@ export class ProviderServiceController {
     return this._providerServiceService.browseServices(query);
   }
 
+  @Get(ROUTES.PROVIDER_SERVICE.BROWSE_ONE)
+  @ResponseMessage(RESPONSE_MESSAGES.PROVIDER_SERVICE.GET_ONE_SUCCESS)
+  async getBrowseServiceById(@Param('id') id: string) {
+    return this._providerServiceService.getBrowseServiceById(id);
+  }
+
   @Get(ROUTES.PROVIDER_SERVICE.GET_ONE)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(ROLES.PROVIDER)

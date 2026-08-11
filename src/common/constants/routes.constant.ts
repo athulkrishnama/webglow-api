@@ -10,6 +10,7 @@ export const ROUTES = {
     CREATE: '',
     MY_SERVICES: 'my',
     BROWSE: 'browse',
+    BROWSE_ONE: 'browse/:id',
     ADMIN: 'admin',
     GET_ONE: ':id',
     UPDATE: ':id',

@@ -145,6 +145,16 @@ export class ProviderServiceService {
     }
   }
 
+  async getBrowseServiceById(id: string): Promise<ProviderService> {
+    const service = await this._providerServiceRepo.findById(id);
+
+    if (!service || !service.isActive) {
+      throw new NotFoundException(ERRORS.PROVIDER_SERVICE.NOT_FOUND);
+    }
+
+    return service;
+  }
+
   private _buildFilters(
     query: ListServicesQueryDto,
     overrides: Partial<ServiceFilterOptions> = {},
